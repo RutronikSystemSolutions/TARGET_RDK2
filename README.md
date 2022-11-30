@@ -1,68 +1,41 @@
-# PSOC6-GENERIC BSP
+# RDK2 BSP
 
 ## Overview
 
-This board support package is intended for creating custom PSoC™ 6 BSPs.
+First choice for the RDK2 was Infineon’s microcontroller PSoC™ 62. It is built on an ultra low-power platform (40-nm) and combines an Arm® Cortex™-M4 and Arm Cortex-M0+ CPUs with low-power Flash technology, programmable digital and analog resources, and offering high- performing CAPSENSE™ technology. Built around the PSoC™ 62 are best fitting standard components in order to offer the highest level of benefit and access to all the comprising features of the microcontroller for customers.
 
-
-
-To use code from the BSP, simply include a reference to `cybsp.h`.
+<img src="images/rdk2_rev0.jpg" style="zoom:20%;" />
 
 ## Features
 
-### Kit Features:
+| Features:               | **Description:**                                             |
+| ----------------------- | ------------------------------------------------------------ |
+| DC Connector:           | 5.5X2.1mm ADAM TECH ADC-028-1-T/R-PA10T connector providing power to the whole board. 6V to 20V DC is applicable. |
+| RS485 Terminal:         | RS485 is a common communications interface in industrial environments, equipped with a SP3078EEN-L/TR driver from MaxLinear. |
+| Li-ION Charger:         | nPM1100 from Nordic Semiconductor. Very common charger used for designing IoT and other portable devices. |
+| Rotary Switch:          | Compact and versatile switch from C&K for power sources selection. Especially convenient when it is needed to select a single option from the up to seven inputs. |
+| CR1220 Battery Socket:  | The Keystone CR1220 coin battery holder enables developers to have the whole system running at low power from a coin battery or simply keeps the RTC Clock powered when the MCU is shut down. |
+| CY8C6245AZI-S3D72:      | Ultra-low-power high-performance microcontroller.            |
+| Arduino RESET Switch:   | The DIP switch from DIPTRONICS enables to disconnect of the RESET signal from the Arduino socket. This is necessary in some cases because offline shields may interfere with the RESET signal and prevent the microcontroller from starting up. |
+| Potentiometer:          | Tiny but useful potentiometer-trimmer with a knob from PIHER. It is used for testing the ADC peripheral or even adjusting the mounted Arduino shield. |
+| Micro SD Card Socket:   | High-quality ADAM TECH socket for constant data logging or removable/portable large amounts of data. |
+| USB Type-C:             | Comes with onboard stand-alone power delivery controller CYPD3177 from Infineon and Type-C connector from JAE. Enhances power supply options for the development platform. Also serves as an innovative demonstration purpose for particular clients who need to remove barrel DC connectors from existing designs. |
+| Sink Output Terminal:   | Small terminal connector from SAURO is used to connect a load and supply it with power from the power source connected to a USB Type-C connector. |
+| CAN FD Terminal:        | Minitek MicrospaceTM connector in combination with CAN FD driver TLE9251VLE and PSoC™ 6245 controller with integrated CAN FD peripheral provides a development-ready solution for CAN/CAN FD applications. |
+| Current Monitor:        | Test point contacts from Keystone enable current measurement using an oscilloscope or multimeter. For ultra-low-power applications additional specialized equipment is available. |
+| SEMPER™ NOR Flash :     | A 512MBit SEMPER™ NOR Flash connected with microcontroller QSPI can be used to store large amounts of program data or even the firmware that may run directly from it. |
+| PSRAM:                  | The AP Memory APS6404L-3SQR-ZR PSRAM is connected with a microcontroller via QSPI interface and is dedicated for the applications where large amounts of RAM are needed having low power consumption in mind. |
+| 10-pin ARM SWD:         | Amphenol connector used for connecting third-party debuggers as J-Ling etc. |
+| KitProg3 via Micro USB: | ADAM TECH micro USB connector is used to interface the KitProg3 on-board-debugger. The KitProg3 Debugger is based on a CY8C5868LTI-LP039 microcontroller. |
+| CAPSENSE™:              | Highlighted superior feature of the PSoC™ MCUs.              |
+| The Buttons:            | High quality and durability Al buttons from Panasonic.       |
+| The Power Management:   | Based on Diodes and ROHM products. The ROHM Buck/Boost BD83070GWL-E2 controller enables the board to be powered from the Li-ION battery. The Diodes AP63357DV-7 Buck high-efficiency controller allows having a high-power supply providing developers with up to 3.5A of current at 5V. |
 
-* This is a generic template, there is no corresponding physical board and hence no board-specific macros. The user is expected to create a custom BSP with various pin/hardware details - Refer to KBA230822. Code examples using kit/board resources will not be shown for this BSP until the manifest data for the BSP is updated to include additional capabilities. Refer to ModusToolbox user guide for creating custom manifests.
-* This manifest can also be used to allow the board to show up in the ModusToolbox tools
+## Legal Disclaimer
 
-### Kit Contents:
+The evaluation board including the software is for testing purposes only and, because it has limited functions and limited resilience, is not suitable for permanent use under real conditions. If the evaluation board is nevertheless used under real conditions, this is done at one’s responsibility; any liability of Rutronik is insofar excluded. 
 
-* NA
+<img src="images/rutronik_origin_kaunas.png" style="zoom:50%;" />
 
-## BSP Configuration
 
-The BSP has a few hooks that allow its behavior to be configured. Some of these items are enabled by default while others must be explicitly enabled. Items enabled by default are specified in the PSOC6-GENERIC.mk file. The items that are enabled can be changed by creating a custom BSP or by editing the application makefile.
 
-Components:
-* Device specific category reference (e.g.: CAT1) - This component, enabled by default, pulls in any device specific code for this board.
-
-Defines:
-* CYBSP_WIFI_CAPABLE - This define, disabled by default, causes the BSP to initialize the interface to an onboard wireless chip if it has one.
-* CY_USING_HAL - This define, enabled by default, specifies that the HAL is intended to be used by the application. This will cause the BSP to include the applicable header file and to initialize the system level drivers.
-* CYBSP_CUSTOM_SYSCLK_PM_CALLBACK - This define, disabled by default, causes the BSP to skip registering its default SysClk Power Management callback, if any, and instead to invoke the application-defined function `cybsp_register_custom_sysclk_pm_callback` to register an application-specific callback.
-
-### Clock Configuration
-
-| Clock    | Source    | Output Frequency |
-|----------|-----------|------------------|
-| FLL      | IMO       | 48.0 MHz         |
-| PLL      | IMO       | 144.0 MHz        |
-| CLK_HF0  | CLK_PATH1 | 144 MHz          |
-
-### Power Configuration
-
-* System Active Power Mode: LP
-* System Idle Power Mode: Deep Sleep
-* VDDA Voltage: 3300 mV
-* VDDD Voltage: 3300 mV
-
-See the [BSP Setttings][settings] for additional board specific configuration settings.
-
-## API Reference Manual
-
-The PSOC6-GENERIC Board Support Package provides a set of APIs to configure, initialize and use the board resources.
-
-See the [BSP API Reference Manual][api] for the complete list of the provided interfaces.
-
-## More information
-* [PSOC6-GENERIC BSP API Reference Manual][api]
-* [PSOC6-GENERIC Documentation](https://github.com/infineon/TARGET_PSOC6-GENERIC)
-* [Cypress Semiconductor, an Infineon Technologies Company](http://www.cypress.com)
-* [Infineon GitHub](https://github.com/infineon)
-* [ModusToolbox™](https://www.cypress.com/products/modustoolbox-software-environment)
-
-[api]: https://infineon.github.io/TARGET_PSOC6-GENERIC/html/modules.html
-[settings]: https://infineon.github.io/TARGET_PSOC6-GENERIC/html/md_bsp_settings.html
-
----
-© Cypress Semiconductor Corporation (an Infineon company) or an affiliate of Cypress Semiconductor Corporation, 2019-2022.
