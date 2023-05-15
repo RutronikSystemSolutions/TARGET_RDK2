@@ -32,6 +32,7 @@
                 "pot",
                 "psoc6",
                 "qspi",
+                "rdk2",
                 "rtc",
                 "sdhc",
                 "smart_io",

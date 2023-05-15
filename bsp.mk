@@ -2,7 +2,7 @@
 # \file bsp.mk
 #
 # \brief
-# Define the PSOC6-GENERIC target.
+# Define the RDK2 target.
 #
 ################################################################################
 # \copyright
