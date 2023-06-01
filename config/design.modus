@@ -176,7 +176,7 @@
                 </Block>
                 <Block location="ioss[0].port[3].pin[0]">
                     <Alias value="KITPROG_RX"/>
-                    <Alias value="_CYBSP_DEBUG_UART_RX"/>
+                    <Alias value="CYBSP_DEBUG_UART_RX"/>
                 </Block>
                 <Block location="ioss[0].port[3].pin[1]">
                     <Alias value="KITPROG_TX"/>
