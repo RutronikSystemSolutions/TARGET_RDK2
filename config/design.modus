@@ -108,9 +108,11 @@
                 </Block>
                 <Block location="ioss[0].port[12].pin[0]">
                     <Alias value="ARDU_SCL"/>
+                    <Alias value="CYBSP_I2C_SCL"/>
                 </Block>
                 <Block location="ioss[0].port[12].pin[1]">
                     <Alias value="ARDU_SDA"/>
+                    <Alias value="CYBSP_I2C_SDA"/>
                 </Block>
                 <Block location="ioss[0].port[12].pin[6]">
                     <Alias value="ECO_IN"/>
@@ -174,9 +176,11 @@
                 </Block>
                 <Block location="ioss[0].port[3].pin[0]">
                     <Alias value="KITPROG_RX"/>
+                    <Alias value="_CYBSP_DEBUG_UART_RX"/>
                 </Block>
                 <Block location="ioss[0].port[3].pin[1]">
                     <Alias value="KITPROG_TX"/>
+                    <Alias value="CYBSP_DEBUG_UART_TX"/>
                 </Block>
                 <Block location="ioss[0].port[5].pin[0]">
                     <Alias value="CANFD_RX"/>
@@ -186,9 +190,11 @@
                 </Block>
                 <Block location="ioss[0].port[5].pin[6]">
                     <Alias value="ARDU_IO2"/>
+                    <Alias value="P5_2"/>
                 </Block>
                 <Block location="ioss[0].port[5].pin[7]">
                     <Alias value="ARDU_IO3"/>
+                    <Alias value="P5_3"/>
                 </Block>
                 <Block location="ioss[0].port[6].pin[0]">
                     <Alias value="RS485_RX"/>
@@ -373,6 +379,7 @@
                 </Block>
                 <Block location="ioss[0].port[9].pin[0]">
                     <Alias value="LED1"/>
+                    <Alias value="CYBSP_USER_LED"/>
                 </Block>
                 <Block location="ioss[0].port[9].pin[1]">
                     <Alias value="LED2"/>
@@ -382,6 +389,8 @@
                 </Block>
                 <Block location="ioss[0].port[9].pin[3]">
                     <Alias value="USER_BTN1"/>
+                    <Alias value="CYBSP_USER_BTN_DRIVE"/>
+                    <Alias value="CYBSP_USER_BTN"/>
                 </Block>
                 <Block location="scb[0]">
                     <Alias value="ARDU_UART"/>

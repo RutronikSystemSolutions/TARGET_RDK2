@@ -19,7 +19,6 @@
                 "flash_512k",
                 "hal",
                 "i2c",
-                "i2s",
                 "led",
                 "low_power",
                 "lptimer",
