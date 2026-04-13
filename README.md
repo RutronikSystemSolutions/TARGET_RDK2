@@ -2,7 +2,7 @@
 
 ## Overview
 
-First choice for the RDK2 was Infineon’s microcontroller PSoC™ 62. It is built on an ultra-low-power platform (40-nm) and combines an Arm® Cortex™-M4 and Arm Cortex-M0+ CPUs with low-power Flash technology, programmable digital and analogue resources, and offers high-performing CAPSENSE™ technology. Built around the PSoC™ 62 are the best-fitting standard components to offer the highest level of benefit and access to all the microcontroller's features for customers.
+First choice for the RDK2 was Infineon’s microcontroller PSoC™ 62. It is built on an ultra-low-power platform (40-nm) and combines an Arm® Cortex™-M4 and Arm Cortex-M0+ CPUs with low-power Flash technology, programmable digital and analogue resources, and offers high-performing CAPSENSE™ technology. Built around the PSoC™ 62 are the best-fitting standard components.
 
 <img src="images/rdk2_rev0.jpg" style="zoom:20%;" />
 
