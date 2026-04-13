@@ -26,7 +26,8 @@
 ;*
 ;*******************************************************************************
 ;* \copyright
-;* Copyright 2016-2021 Cypress Semiconductor Corporation
+;* (c) 2016-2026, Infineon Technologies AG or an affiliate of
+;* Infineon Technologies AG.
 ;* SPDX-License-Identifier: Apache-2.0
 ;*
 ;* Licensed under the Apache License, Version 2.0 (the "License");
@@ -141,6 +142,7 @@ LR_IROM1 FLASH_START FLASH_SIZE
     RW_IRAM1 +0 UNINIT
     {
         * (.noinit)
+        * (.bss.noinit)
     }
 
     ; To use unprotected public RAM uncomment the following .cy_sharedmem section placement. Recalculate the HEAP start address.

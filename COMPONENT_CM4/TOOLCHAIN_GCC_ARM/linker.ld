@@ -19,7 +19,8 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2016-2021 Cypress Semiconductor Corporation
+* (c) 2016-2026, Infineon Technologies AG or an affiliate of
+* Infineon Technologies AG.
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,7 +46,7 @@ STACK_SIZE = 0x1000;
 
 /* By default, the COMPONENT_CM0P_SLEEP prebuilt image is used for the CM0p core.
 * More about CM0+ prebuilt images, see here:
-* https://github.com/cypresssemiconductorco/psoc6cm0p
+* https://github.com/Infineon/psoc6cm0p
 */
 /* The size of the Cortex-M0+ application image at the start of FLASH */
 FLASH_CM0P_SIZE  = 0x2000;
@@ -396,6 +397,7 @@ SECTIONS
     {
         __cy_xip_start = .;
         KEEP(*(.cy_xip))
+        KEEP(*(.cy_xip.*))
         __cy_xip_end = .;
     } > xip
 

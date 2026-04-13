@@ -7,8 +7,8 @@
 *
 ********************************************************************************
 * \copyright
-* Copyright 2018-2022 Cypress Semiconductor Corporation (an Infineon company) or
-* an affiliate of Cypress Semiconductor Corporation
+* (c) 2018-2026, Infineon Technologies AG or an affiliate of
+* Infineon Technologies AG.
 *
 * SPDX-License-Identifier: Apache-2.0
 *
@@ -32,7 +32,7 @@
 #if defined(CY_USING_HAL)
 #include "cyhal_hwmgr.h"
 #include "cyhal_syspm.h"
-
+#include "cyhal_system.h"
 #if defined(CYBSP_WIFI_CAPABLE) && defined(CYHAL_UDB_SIO)
 #include "SDIO_HOST.h"
 #endif
@@ -89,33 +89,39 @@ static cy_rslt_t cybsp_register_sysclk_pm_callback(void)
 //--------------------------------------------------------------------------------------------------
 cy_rslt_t cybsp_init(void)
 {
+    #if defined(CY_USING_HAL)
     // Setup hardware manager to track resource usage then initialize all system (clock/power) board
     // configuration
-    #if defined(CY_USING_HAL)
     cy_rslt_t result = cyhal_hwmgr_init();
 
     if (CY_RSLT_SUCCESS == result)
     {
         result = cyhal_syspm_init();
     }
+    #else // if defined(CY_USING_HAL)
+    cy_rslt_t result = CY_RSLT_SUCCESS;
+    #endif /* defined(CY_USING_HAL) */
 
     #ifdef CY_CFG_PWR_VDDA_MV
     if (CY_RSLT_SUCCESS == result)
     {
+        #if defined(CY_USING_HAL)
+        // Old versions of classic HAL have this API in the Syspm HAL. In versions of HAL which
+        // support HAL-Lite configuration, this is moved to the System HAL, with compatibility
+        // macros that exist in classic HAL configuration only (HAL-Lite configuration does
+        // not include SysPm HAL)
         cyhal_syspm_set_supply_voltage(CYHAL_VOLTAGE_SUPPLY_VDDA, CY_CFG_PWR_VDDA_MV);
+        #endif
     }
-    #endif
+    #endif // ifdef CY_CFG_PWR_VDDA_MV
 
-    #else // if defined(CY_USING_HAL)
-    cy_rslt_t result = CY_RSLT_SUCCESS;
-    #endif // if defined(CY_USING_HAL)
 
     // By default, the peripheral configuration will be done on the first core running user code.
     // This is the CM0+ if it is available and not running a pre-built image, and the CM4 otherwise.
     // This is done to ensure configuration is available for all cores that might need to use it.
     // In the case of a dual core project, this can be changed below to perform initialization on
     // the CM4 if necessary.
-    #if defined(CORE_NAME_CM0_0) || !(__CM0P_PRESENT) || (defined(CORE_NAME_CM4_0) && \
+    #if defined(CORE_NAME_CM0P_0) || !(__CM0P_PRESENT) || (defined(CORE_NAME_CM4_0) && \
     defined(CY_USING_PREBUILT_CM0P_IMAGE))
     cycfg_config_init();
     #endif
@@ -132,7 +138,7 @@ cy_rslt_t cybsp_init(void)
         #endif
     }
 
-    #if defined(CYBSP_WIFI_CAPABLE) && defined(CYHAL_UDB_SIO)
+    #if defined(CYBSP_WIFI_CAPABLE) && defined(CYHAL_UDB_SIO) && defined(CY_USING_HAL)
 
     // Reserve resources for the UDB SDIO interface that might want to be used by others. This
     // includes specific clock and DMA instances. This must be done before other HAL API calls as
@@ -143,7 +149,7 @@ cy_rslt_t cybsp_init(void)
     {
         result = SDIO_ReserveResources();
     }
-    #endif // defined(CYBSP_WIFI_CAPABLE) && defined(CYHAL_UDB_SIO)
+    #endif // defined(CYBSP_WIFI_CAPABLE) && defined(CYHAL_UDB_SIO) && defined(CY_USING_HAL)
 
     // CYHAL_HWMGR_RSLT_ERR_INUSE error code could be returned if any needed for BSP resource was
     // reserved by user previously. Please review the Device Configurator (design.modus) and the BSP
